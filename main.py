@@ -17,7 +17,7 @@ class App():
         normalHeartRateStandard = 135  # 태아의 심박수 기준
         normalHeartRateDeviation = 10  # 태아가 정상 상태일 때 심박수 편차
         normalHeartRateMaxVariance = 2  # 태아가 정상 상태일 때 초당 심박수 최대 변화량
-        probabilityToNormalStatus = 20  # 태아가 정상 상태로 돌아올 확률 (value / 10000)
+        probabilityToNormalStatus = 500  # 태아가 정상 상태로 돌아올 확률 (value / 10000)
 
         # 심박수 불규칙 상태
         irregularHeartRateDeviation = 20  # 태아의 심박수가 불규칙적일 때 심박수 편차
@@ -28,7 +28,7 @@ class App():
         highHeartRateIncrease = 25  # 태아의 심박수가 높은 상태일 때 심박수 기준 상승치
         highHeartRateDeviation = 15  # 태아의 심박수가 높은 상태일 때 심박수 편차
         highHeartRateMaxVariance = 2.8  # 태아의 심박수가 높은 상태일 때 초당 심박수 최대 변화량
-        probabilityToHighHeartRateStatus = 10  # 태아의 심박수가 높은 상태로 변하게 될 확률 (value / 1000)
+        probabilityToHighHeartRateStatus = 5000  # 태아의 심박수가 높은 상태로 변하게 될 확률 (value / 10000)
 
         # 낮은 심박수 상태
         lowHeartRateDecrease = 20  # 태아의 심박수가 낮은 상태일 때 심박수 기준 하락치
@@ -236,13 +236,13 @@ class App():
 
                 tag = EdgeTag('Device', 'heart rate', self.heartRate)
                 edgeData.tagList.append(tag)
-                # print("generate heart rate data : " + str(self.heartRate) + " (" + self.fetalStatus + "), (" + str(standard) + ")")
+                print("generate heart rate data : " + str(self.heartRate) + " (" + self.fetalStatus + "), (" + str(standard) + ")")
 
             def genButtonPressedData():
                 if chance <= probabilityToPressButton and self.fetalStatus != 'irregular heart rate' and self.heartRate > 160 and self.buttonCount > minIntervalToPressButton:
                     tag = EdgeTag('Device', 'fetal movement pressed', 100)
                     edgeData.tagList.append(tag)
-                    # print("generate button pressed data")
+                    print("generate button pressed data")
                     self.buttonCount = 0
 
             genHeartRateData()
